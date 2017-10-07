@@ -1,0 +1,354 @@
+/* ==========================================================================
+   Mixins
+   ========================================================================== */
+@function color($colors, $key) {
+  @return map-get($colors, $key);
+}
+
+@mixin vertical-align($margin: -0.25em) {
+  &:before {
+    content: '';
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+    margin-right: $margin;
+  }
+}
+
+@mixin borderBox {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+@mixin clearfix() {
+    &:before,
+    &:after {
+        content: "";
+        display: table;
+    }
+    &:after {
+        clear: both;
+    }
+}
+
+// https://css-tricks.com/snippets/sass/maintain-aspect-ratio-mixin/
+@mixin aspect-ratio($width, $height, $element: '.content') {
+  position: relative;
+  &:before {
+    display: block;
+    content: "";
+    width: 100%;
+    padding-top: ($height / $width) * 100%;
+  }
+  > #{$element} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+}
+
+@mixin border-radius($radius){
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  -ms-border-radius: $radius;
+  border-radius: $radius;
+}
+
+@mixin user-select($select) {
+  -webkit-user-select: $select;
+  -moz-user-select: $select;
+  -ms-user-select: $select;
+  user-select: $select;
+}
+
+@mixin box-sizing($boxsizing){
+  -webkit-box-sizing: $boxsizing;
+  -moz-box-sizing: $boxsizing;
+  box-sizing: $boxsizing;
+}
+
+@mixin prefix($property, $value) {
+    -webkit-#{$property}: $value;
+       -moz-#{$property}: $value;
+        -ms-#{$property}: $value;
+         -o-#{$property}: $value;
+            #{$property}: $value;
+}
+
+@mixin transition($transition){
+  -webkit-transition: $transition;
+  -moz-transition: $transition;
+  -o-transition: $transition;
+  transition: $transition;
+}
+
+@mixin transform-origin($origin){
+  -webkit-transform-origin: $origin;
+  -moz-transform-origin: $origin;
+  -o-transform-origin: $origin;
+  transform-origin: $origin;
+}
+
+@mixin columns($columns) {
+  -webkit-columns: $columns;
+   -moz-columns: $columns;
+        columns: $columns;
+}
+
+@mixin transform-style($style){
+  -webkit-transform-style: $style;
+  -moz-transform-style: $style;
+  -o-transform-style: $style;
+  transform-style: $style;
+}
+
+@mixin transform($transform){
+   -webkit-transform: $transform;
+   -moz-transform: $transform;
+    -ms-transform: $transform;
+     -o-transform: $transform;
+         transform: $transform;
+}
+
+@mixin animation($parameters) {
+  -webkit-animation : $parameters;
+  -moz-animation    : $parameters;
+  -ms-animation     : $parameters;
+  animation         : $parameters;
+}
+
+@mixin animation-name($parameters) {
+  -webkit-animation-name : $parameters;
+  -moz-animation-name    : $parameters;
+  -ms-animation-name     : $parameters;
+  animation-name         : $parameters;
+}
+
+@mixin animation-delay($parameters) {
+  -webkit-animation-delay : $parameters;
+  -moz-animation-delay    : $parameters;
+  -ms-animation-delay     : $parameters;
+  animation-delay         : $parameters;
+}
+
+@mixin animation-fill-mode($parameters) {
+  -webkit-animation-fill-mode : $parameters;
+  -moz-animation-fill-mode    : $parameters;
+  -ms-animation-fill-mode     : $parameters;
+  animation-fill-mode         : $parameters;
+}
+
+@mixin animation-play-state($parameters) {
+  -webkit-animation-play-state : $parameters;
+  -moz-animation-play-state    : $parameters;
+  -ms-animation-play-state     : $parameters;
+  animation-play-state         : $parameters;
+}
+
+@mixin animation-duration($parameters) {
+  -webkit-animation-duration : $parameters;
+  -moz-animation-duration    : $parameters;
+  -ms-animation-duration     : $parameters;
+  animation-duration         : $parameters;
+}
+
+@mixin animation-iterations($parameters) {
+  -webkit-animation-iteration-count : $parameters;
+  -moz-animation-iteration-count    : $parameters;
+  -ms-animation-iteration-count     : $parameters;
+  animation-iteration-count         : $parameters;
+}
+
+@mixin linear-gradient($startColor, $endColor) {
+  background: -webkit-linear-gradient(90deg, $startColor 0%, $endColor 100%);
+  background: -moz-linear-gradient(90deg, $startColor 0%, $endColor 100%);
+  background: -o-linear-gradient(90deg, $startColor 0%, $endColor 100%);
+  background: -ms-linear-gradient(90deg, $startColor 0%, $endColor 100%);
+  background: linear-gradient(90deg, $startColor 0%, $endColor 100%);
+}
+
+@mixin vertical-gradient($startColor, $endColor) {
+  background: -webkit-linear-gradient(0deg, $startColor 0%, $endColor 100%);
+  background: -moz-linear-gradient(0deg, $startColor 0%, $endColor 100%);
+  background: -o-linear-gradient(0deg, $startColor 0%, $endColor 100%);
+  background: -ms-linear-gradient(0deg, $startColor 0%, $endColor 100%);
+  background: linear-gradient(0deg, $startColor 0%, $endColor 100%);
+}
+
+@mixin opacity($opacity) {
+  opacity: $opacity;
+  $opacity-ie: ($opacity * 100);
+  filter: alpha(opacity=$opacity-ie);
+}
+
+@mixin respond-from($size) {
+  @media screen and (min-width: $size) {
+    @content;
+  }
+}
+
+@mixin respond-to($size) {
+  @media screen and (max-width: $size) {
+    @content;
+  }
+}
+
+@mixin respond-between($lower, $upper) {
+  @media screen and (min-width: $lower) and (max-width: $upper) {
+    @content;
+  }
+}
+
+@mixin keyframes($animationName) {
+  @-webkit-keyframes #{$animationName} {
+    @content;
+  }
+
+  @-moz-keyframes #{$animationName} {
+    @content;
+  }
+
+  @-o-keyframes #{$animationName} {
+    @content;
+  }
+
+  @keyframes #{$animationName} {
+    @content;
+  }
+}
+
+@mixin flex-direction($direction: row) {
+  -webkit-flex-direction: $direction;
+      -ms-flex-direction: $direction;
+          flex-direction: $direction;
+}
+
+@mixin flex-wrap($wrap: nowrap) {
+  @if $wrap == nowrap {
+    -ms-flex-wrap: none;
+  }
+  @else {
+    -ms-flex-wrap: $wrap;
+  }
+  -webkit-flex-wrap: $wrap;
+          flex-wrap: $wrap;
+}
+
+@mixin flex-order($order: 0) {
+  -ms-flex-order: $order;
+  -webkit-order: $order;
+      -ms-order: $order;
+          order: $order;
+}
+
+@mixin justify-content($justify: flex-start) {
+  @if $justify == flex-start {
+    -ms-flex-pack: start;
+  }
+  @else if $justify == flex-end {
+    -ms-flex-pack: end;
+  }
+  @elseif $justify == space-between {
+    -ms-flex-pack: justify;
+  }
+  @else {
+    -ms-flex-pack: $justify;
+  }
+  -webkit-justify-content: $justify;
+      -ms-justify-content: $justify;
+          justify-content: $justify;
+}
+
+@mixin align-items($align: auto) {
+  @if $align == flex-start {
+    -ms-flex-align: start;
+  }
+  @else if $align == flex-end {
+    -ms-flex-align: end;
+  }
+  @else {
+    -ms-flex-align: $align;
+  }
+  -webkit-align-items: $align;
+      -ms-align-items: $align;
+          align-items: $align;
+}
+
+@mixin align-content($align: auto) {
+  @if $align == flex-start {
+    -ms-flex-line-pack: start;
+  }
+  @else if $align == flex-end {
+    -ms-flex-line-pack: end;
+  }
+  @else {
+    -ms-flex-line-pack: $align;
+  }
+  -webkit-align-content: $align;
+      -ms-align-content: $align;
+          align-content: $align;
+}
+
+@mixin align-self($align: auto) {
+  @if $align == flex-start {
+    -ms-flex-item-align: start;
+  }
+  @else if $align == flex-end {
+    -ms-flex-item-align: end;
+  }
+  @else {
+    -ms-flex-item-align: $align;
+  }
+  -webkit-align-self: $align;
+      -ms-align-self: $align;
+          align-self: $align;
+}
+
+@mixin flex($value, $important: false){
+  @if ($important) {
+    -webkit-box-flex: $value!important;
+    -moz-box-flex: $value!important;
+    -webkit-flex: $value!important;
+    -ms-flex: $value!important;
+    flex: $value!important;
+  }
+  @else {
+    -webkit-box-flex: $value;
+    -moz-box-flex: $value;
+    -webkit-flex: $value;
+    -ms-flex: $value;
+    flex: $value;
+  }
+}
+
+@mixin flex-display($important: false){
+  @if ($important) {
+    display: -webkit-box!important;
+    display: -moz-box!important;
+    display: -ms-flexbox!important;
+    display: -webkit-flex!important;
+    display: flex!important;
+  }
+  @else {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+  }
+}
+
+@mixin mobile {
+  @include respond-to($screenTablet) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @include respond-from($screenTablet) {
+    @content;
+  }
+}

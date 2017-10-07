@@ -15,6 +15,8 @@ export class HomeComponent implements OnInit {
 
   html: any;
   htmlEditor: any;
+  output: any;
+  loading: any = false;
 
   constructor(
     private API: ApiService,
@@ -35,14 +37,31 @@ export class HomeComponent implements OnInit {
   }
 
   run() {
-    console.log(
-      "RUN THIS RUBY",
-      this.htmlEditor.getValue()
-    );
+    if (this.loading || !this.htmlEditor.getValue()) {
+      return false;
+    }
+
+    this.loading = true;
+    this.output = false;
 
     this.API.apiCall(environment.host + environment.endpoints['test'], { body: this.htmlEditor.getValue() }).subscribe((data) => {
       console.log("RESP", data);
+      if (data.state !== "success" || !data.data) {
+        this.clearLoading();
+        return false;
+      }
+
+      if (data.data) {
+        this.output = data.data;
+        this.clearLoading();
+      }
     });
+  }
+
+  clearLoading() {
+    setTimeout(() => {
+      this.loading = false;
+    }, 3000);
   }
 
   init() {

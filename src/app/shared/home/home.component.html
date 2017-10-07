@@ -4,11 +4,33 @@
     <h1>Ruby Console</h1>
   </div>
 
-  <div class="console">
-    <h2>Dis is the console</h2>
-    <pre id="editor">
-      puts "Hello World"
-    </pre>
-    <button (click)="run()">Hit it</button>
+  <div class="console-container">
+    <div class="console">
+      <pre id="editor">
+        puts "Hello World"
+      </pre>
+      <div id="output">
+        <div id="skeleton" *ngIf="loading">
+          <div class="skeleton skeleton-large"></div>
+          <div class="skeleton-grid">
+            <div class="skeleton-grid grid-3"><div class="skeleton"></div></div>
+            <div class="skeleton-grid grid-3"><div class="skeleton"></div></div>
+            <div class="skeleton-grid grid-6"><div class="skeleton"></div></div>
+          </div>
+          <div class="skeleton-grid">
+            <div class="skeleton-grid grid-3"><div class="skeleton"></div></div>
+            <div class="skeleton-grid grid-6"><div class="skeleton"></div></div>
+            <div class="skeleton-grid grid-3"><div class="skeleton"></div></div>
+          </div>
+        </div>
+
+        <pre [innerHTML]="output" *ngIf="!loading"></pre>
+      </div>
+      <button (click)="run()"><span>Hit it</span></button>
+    </div>
+
+    <div class="info">
+      <h2>Run ruby in your browser</h2>
+    </div>
   </div>
 </div>

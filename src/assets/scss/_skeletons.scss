@@ -1,0 +1,67 @@
+#skeleton {
+  @-moz-keyframes loadSkeleton {
+    from {width: 0;}
+    to {width: 100%;}
+  }
+
+  @-webkit-keyframes loadSkeleton {
+    from {width: 0;}
+    to {width: 100%;}
+  }
+
+  @keyframes loadSkeleton {
+    from {width: 0;}
+    to {width: 100%;}
+  }
+
+  z-index: 2;
+  position: relative;
+  padding: 10px 0;
+  margin: 0 auto;
+
+  .skeleton {
+    position: relative;
+    margin: 0 auto 8px;
+    height: 10px;
+    background: rgba(#fff, 0.8);
+    border: 1px solid rgba(#000, 0.05);
+    box-shadow: 1px 1px 10px rgba(#000, 0.01);
+
+    &:after {
+      content: '';
+      width: 0;
+      background: rgba(#fff, 1);
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      @include prefix(animation, loadSkeleton 2s ease infinite);
+    }
+
+    &.skeleton-large {
+      height: 15px;
+    }
+  }
+
+  .skeleton-grid {
+    @include flex-display();
+
+    &.grid-3 {
+      display: block;
+      @include flex(1 1 25%);
+    }
+
+    &.grid-6 {
+      display: block;
+      @include flex(1 1 50%);
+    }
+
+    &.grid-3,
+    &.grid-6 {
+      + .skeleton-grid.grid-3,
+      + .skeleton-grid.grid-6 {
+        margin-left: 10px;
+      }
+    }
+  }
+}

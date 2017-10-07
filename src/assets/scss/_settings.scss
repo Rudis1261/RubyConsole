@@ -1,0 +1,27 @@
+// FONT FAMILIES
+$headingFont: monospace, Arial, 'Helvetica', Verdana;
+$bodyFont: monospace, Arial, 'Helvetica', Verdana;
+
+// FONT SIZES
+$font-xxs: 10px;
+$font-xs: 11px;
+$font-sm: 12px;
+$font-md: 14px;
+$font-lg: 16px;
+$font-xl: 18px;
+$font-xxl: 22px;
+
+// BREAKPOINTS
+$screenMobile: 320px;
+$screenMobileLg: 480px;
+$screenSlim: 640px;
+$screenTablet: 768px;
+$screenDesktop: 1024px;
+$screenDesktopLg: 1280px;
+$screenJumbo: 1440px;
+$screenFull: 860px;
+$screenFullPage: $screenFull;
+$screenFullWidth: $screenFullPage;
+
+// COLORS
+$colorPrimary: #911800;
