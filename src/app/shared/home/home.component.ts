@@ -44,8 +44,8 @@ export class HomeComponent implements OnInit {
     this.loading = true;
     this.output = false;
 
-    this.API.apiCall(environment.host + environment.endpoints['test'], { body: this.htmlEditor.getValue() }).subscribe((data) => {
-      console.log("RESP", data);
+    this.API.apiCall(environment.host + environment.endpoints['document'], { body: this.htmlEditor.getValue() }).subscribe((data) => {
+      //console.log("RESP", data);
       if (data.state !== "success" || !data.data) {
         this.clearLoading();
         return false;
@@ -61,7 +61,7 @@ export class HomeComponent implements OnInit {
   clearLoading() {
     setTimeout(() => {
       this.loading = false;
-    }, 3000);
+    }, 100);
   }
 
   init() {

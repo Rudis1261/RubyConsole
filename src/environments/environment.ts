@@ -7,6 +7,6 @@ export const environment = {
   production: false,
   host: "http://dev.rubycon.com",
   endpoints: {
-    test: "/test"
+    document: "/document"
   }
 };
