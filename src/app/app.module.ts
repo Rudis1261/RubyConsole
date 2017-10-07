@@ -6,6 +6,9 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './shared/home/home.component';
 
+import { ApiService } from './services/api.service';
+import { LoadScriptService } from './services/load-script.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -16,7 +19,10 @@ import { HomeComponent } from './shared/home/home.component';
     FormsModule,
     HttpModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+    ApiService,
+    LoadScriptService
+  ],
+  bootstrap: [ AppComponent ]
 })
 export class AppModule { }

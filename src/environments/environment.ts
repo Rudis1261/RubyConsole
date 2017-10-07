@@ -5,7 +5,7 @@
 
 export const environment = {
   production: false,
-  host: "http://rubycon.com",
+  host: "http://dev.rubycon.com",
   endpoints: {
     test: "/test"
   }
