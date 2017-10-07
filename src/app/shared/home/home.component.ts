@@ -16,6 +16,7 @@ export class HomeComponent implements OnInit {
   html: any;
   htmlEditor: any;
   output: any;
+  error: any = false;
   loading: any = false;
 
   constructor(
@@ -41,6 +42,7 @@ export class HomeComponent implements OnInit {
       return false;
     }
 
+    this.error = false;
     this.loading = true;
     this.output = false;
 
@@ -48,6 +50,8 @@ export class HomeComponent implements OnInit {
       //console.log("RESP", data);
       if (data.state !== "success" || !data.data) {
         this.clearLoading();
+        this.output = data.message;
+        this.error = true;
         return false;
       }
 

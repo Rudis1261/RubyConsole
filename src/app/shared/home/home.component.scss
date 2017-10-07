@@ -66,10 +66,27 @@
     }
   }
 
+  button {
+    display: block;
+    margin: 0 auto 10px;
+  }
+
   pre {
     min-height: 250px;
     font-size: 15px;
     margin: 0 0 10px;
+
+    &.error {
+      color: #fff;
+      background: rgba($colorPrimary, 0.95);
+      font-size: 12px;
+      min-height: 60px;
+      border: 2px solid black;
+
+      @include flex-display();
+      @include align-items(center);
+      @include justify-content(center);
+    }
   }
 
   #output,
@@ -81,7 +98,7 @@
     background: #eee;
     padding: 40px 10px 10px;
     position: relative;
-    margin: 0 0 10px;
+    margin: 0;
 
     &:before {
       position: absolute;

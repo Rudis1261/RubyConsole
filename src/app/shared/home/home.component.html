@@ -9,6 +9,7 @@
       <pre id="editor">
         puts "Hello World"
       </pre>
+      <button (click)="run()"><span>Run Code</span></button>
       <div id="output">
         <div id="skeleton" *ngIf="loading">
           <div class="skeleton skeleton-large"></div>
@@ -23,9 +24,8 @@
             <div class="skeleton-grid grid-3"><div class="skeleton"></div></div>
           </div>
         </div>
-        <pre [innerHTML]="output" *ngIf="!loading"></pre>
+        <pre [innerHTML]="output" *ngIf="!loading" [ngClass]="{'error': error}"></pre>
       </div>
-      <button (click)="run()"><span>Hit it</span></button>
     </div>
 
     <div class="info">
