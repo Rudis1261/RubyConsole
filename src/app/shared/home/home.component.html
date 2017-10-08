@@ -5,6 +5,10 @@
   </div>
 
   <div class="console-container">
+    <div class="help-close" (click)="searchResp=false" *ngIf="searchResp">&times;</div>
+    <div class="help" *ngIf="searchResp">
+      <div class="inner" [innerHTML]="searchResp"></div>
+    </div>
     <div class="console">
       <pre id="editor">
         puts "Hello World"
@@ -30,6 +34,11 @@
 
     <div class="info">
       <h2>Run ruby in your browser</h2>
+      <label>
+        <span>Help Topic</span>
+        <input type="text" placeholder="Array" [(ngModel)]="search" />
+        <input type="submit" value="{{(searching ? 'Searching...' : 'Find')}}" (click)="ri()" [disabled]="searching" />
+      </label>
     </div>
   </div>
 </div>

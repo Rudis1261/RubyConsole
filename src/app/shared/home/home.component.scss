@@ -41,6 +41,7 @@
   .console-container {
     width: 100%;
     max-width: 100%;
+    position: relative;
     @include flex-display();
 
     .console,
@@ -55,6 +56,34 @@
       @include flex(1 1 66%);
     }
 
+    .help-close {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 40px;
+      text-align: center;
+      line-height: 40px;
+      height: 40px;
+      z-index: 101;
+      font-size: 40px;
+      padding: 10px;
+      cursor: pointer;
+    }
+
+    .help {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      padding: 20px;
+      z-index: 100;
+      white-space: pre-line;
+      background: rgba(#fff, 0.95);
+      max-height: 580px;
+      overflow-y: auto;
+    }
+
     .info {
       margin-left: 15px;
       @include flex(1 1 33%);
@@ -62,6 +91,21 @@
       h2 {
         font-size: 16px;
         margin-top: 0;
+      }
+
+      label {
+        padding: 10px;
+        display: block;
+
+        > span {
+          font-size: 12px;
+          text-transform: uppercase;
+        }
+
+        input[type="text"] {
+          padding: 6px 10px;
+          margin: 0 0 5px;
+        }
       }
     }
   }
@@ -99,6 +143,8 @@
     padding: 40px 10px 10px;
     position: relative;
     margin: 0;
+    max-height: 400px;
+    overflow-y: auto;
 
     &:before {
       position: absolute;

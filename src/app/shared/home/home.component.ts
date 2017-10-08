@@ -19,6 +19,10 @@ export class HomeComponent implements OnInit {
   error: any = false;
   loading: any = false;
 
+  search: any = '';
+  searching: any = false;
+  searchResp: any = false;
+
   constructor(
     private API: ApiService,
     private LS: LoadScriptService
@@ -58,6 +62,28 @@ export class HomeComponent implements OnInit {
       if (data.data) {
         this.output = data.data;
         this.clearLoading();
+      }
+    });
+  }
+
+  ri() {
+    if (!this.search || this.search == '' || this.searching) {
+      return false;
+    }
+
+    this.searching = true;
+    this.searchResp = false;
+
+    this.API.apiCall(environment.host + environment.endpoints['help'], { body: this.search }).subscribe((data) => {
+      if (data.state !== "success" || !data.data) {
+        this.searchResp = false;
+        this.searching = false;
+        return false;
+      }
+
+      if (data.data) {
+        this.searching = false;
+        this.searchResp = data.data;
       }
     });
   }
