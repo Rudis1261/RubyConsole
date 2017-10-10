@@ -37,6 +37,36 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  uploaded(e) {
+    if (!e || e == '') {
+      return alert("Something went wrong, upload not received, or empty");
+    }
+
+    this.htmlEditor.setValue(e);
+  }
+
+  download(){
+    // Set up the link
+    var link = document.createElement("a");
+    link.setAttribute("target","_blank");
+
+    if(Blob !== undefined) {
+      var blob = new Blob([this.htmlEditor.getValue()], {type: "text/plain"});
+      link.setAttribute("href", URL.createObjectURL(blob));
+    } else {
+      link.setAttribute("href","data:text/plain," + encodeURIComponent(URL.createObjectURL(blob)));
+    }
+
+    let now = new Date();
+    let date = [now.getDate(), now.getMonth(), now.getFullYear()];
+    let time = [now.getHours(), now.getMinutes(), now.getSeconds()];
+    link.setAttribute("download", "RubyConsole_" + date.join("-") + "_" + time.join(":") + ".rb");
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+
+
   update() {
     console.log("ACE Editor Updates");
   }
@@ -49,6 +79,8 @@ export class HomeComponent implements OnInit {
     this.error = false;
     this.loading = true;
     this.output = false;
+
+    localStorage.setItem('workspace', this.htmlEditor.getValue());
 
     this.API.apiCall(environment.host + environment.endpoints['document'], { body: this.htmlEditor.getValue() }).subscribe((data) => {
       //console.log("RESP", data);
@@ -99,6 +131,12 @@ export class HomeComponent implements OnInit {
     this.htmlEditor.setTheme("ace/theme/github");
     this.htmlEditor.session.setMode("ace/mode/ruby");
     this.htmlEditor.setValue('puts "Hello, World"');
+
+    // We might want to pick up where we left off
+    let workSpace = localStorage.getItem('workspace') || false;
+    if (workSpace && workSpace !== "") {
+      this.htmlEditor.setValue(workSpace);
+    }
 
     // this.htmlEditor.getSession().on('change', function(e) {
     //   this.update();

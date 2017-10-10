@@ -1,22 +1,31 @@
 body,
 html {
   font-family: $bodyFont;
-  background: #f1f1f1;
+  background: #e4e4e4;
 }
 
+.btn,
 button {
   background: $colorPrimary;
+  border: 1px solid $colorPrimary;
   color: #fff;
+  display: inline-block;
   outline: none;
   font-size: 14px;
   overflow: hidden;
   position: relative;
   padding: 8px 15px;
   line-height: 18px;
-  min-width: 150px;
-  border: none;
+  min-width: 80px;
+  text-align: center;
+  cursor: pointer;
   @include border-radius(2px);
   @include transition(200ms all);
+
+  + .btn,
+  button {
+    margin-left: 10px;
+  }
 
   >span {
     position: relative;
@@ -61,4 +70,8 @@ button {
       @include opacity(1);
     }
   }
+}
+
+.btn-group {
+  @include clearfix();
 }

@@ -1,0 +1,29 @@
+:host {
+  input[type="file"] {
+    background: lime;
+  }
+
+  .files-mask {
+    width: 0;
+    height: 0;
+    overflow:hidden;
+  }
+
+  .btn {
+    background: darken(#fff, 5%);
+    border-color: #999;
+    color: #222;
+    margin-left: 10px;
+    float: left;
+
+    &:before,
+    &:after {
+      display: none;
+    }
+
+    &:hover {
+      background: #fff;
+      box-shadow: 1px 1px 5px rgba(146, 146, 146, 0.24);
+    }
+  }
+}

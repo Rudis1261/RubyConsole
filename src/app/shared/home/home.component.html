@@ -13,7 +13,12 @@
       <pre id="editor">
         puts "Hello World"
       </pre>
-      <button (click)="run()"><span>Run Code</span></button>
+
+      <div class="btn-group">
+        <button (click)="run()"><span>Run <i class="icon-play"></i></span></button>
+        <app-upload-download (onUpload)="uploaded($event)" (onDownload)="download()"></app-upload-download>
+      </div>
+
       <div id="output">
         <div id="skeleton" *ngIf="loading">
           <div class="skeleton skeleton-large"></div>

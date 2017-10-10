@@ -8,11 +8,13 @@ import { HomeComponent } from './shared/home/home.component';
 
 import { ApiService } from './services/api.service';
 import { LoadScriptService } from './services/load-script.service';
+import { UploadDownloadComponent } from './shared/upload-download/upload-download.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    UploadDownloadComponent
   ],
   imports: [
     BrowserModule,

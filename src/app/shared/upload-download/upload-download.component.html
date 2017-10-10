@@ -1,0 +1,15 @@
+<label for="files" class="btn" title="Upload a file instead of typing it out">
+  Upload <i class="icon-upload"></i>
+  <div class="files-mask">
+    <input
+      type="file"
+      id="files"
+      name="files[]"
+      multiple
+      (change)="handleFileSelect($event)"
+    />
+  </div>
+</label>
+
+<div class="btn" (click)="triggerDownload()">Download <i class="icon-download"></i></div>
+
