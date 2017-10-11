@@ -18,6 +18,7 @@ export class HomeComponent implements OnInit {
   output: any;
   error: any = false;
   loading: any = false;
+  workspace: any = false;
 
   search: any = '';
   searching: any = false;
@@ -27,6 +28,7 @@ export class HomeComponent implements OnInit {
     private API: ApiService,
     private LS: LoadScriptService
   ) {
+    this.workspace = localStorage.getItem('workspace') || false;
   }
 
   ngOnInit() {
@@ -43,6 +45,7 @@ export class HomeComponent implements OnInit {
     }
 
     this.htmlEditor.setValue(e);
+    this.output = '';
   }
 
   download(){
@@ -66,11 +69,6 @@ export class HomeComponent implements OnInit {
     document.body.removeChild(link);
   }
 
-
-  update() {
-    console.log("ACE Editor Updates");
-  }
-
   run() {
     if (this.loading || !this.htmlEditor.getValue()) {
       return false;
@@ -78,9 +76,7 @@ export class HomeComponent implements OnInit {
 
     this.error = false;
     this.loading = true;
-    this.output = false;
-
-    localStorage.setItem('workspace', this.htmlEditor.getValue());
+    this.output = '';
 
     this.API.apiCall(environment.host + environment.endpoints['document'], { body: this.htmlEditor.getValue() }).subscribe((data) => {
       //console.log("RESP", data);
@@ -126,20 +122,25 @@ export class HomeComponent implements OnInit {
     }, 100);
   }
 
+  saveWorkspace() {
+    this.workspace = this.htmlEditor.getValue();
+    localStorage.setItem('workspace', this.htmlEditor.getValue());
+  }
+
   init() {
     this.htmlEditor = ace.edit("editor");
     this.htmlEditor.setTheme("ace/theme/github");
     this.htmlEditor.session.setMode("ace/mode/ruby");
-    this.htmlEditor.setValue('puts "Hello, World"');
 
-    // We might want to pick up where we left off
-    let workSpace = localStorage.getItem('workspace') || false;
-    if (workSpace && workSpace !== "") {
-      this.htmlEditor.setValue(workSpace);
+    if (this.workspace && this.workspace !== '') {
+      this.htmlEditor.setValue(this.workspace);
+    } else {
+      this.htmlEditor.setValue('puts "Hello, World"');
     }
 
-    // this.htmlEditor.getSession().on('change', function(e) {
-    //   this.update();
-    // });
+    let $scope = this;
+    this.htmlEditor.getSession().on('change', function(e) {
+      $scope.saveWorkspace();
+    });
   }
 }
